@@ -8,7 +8,11 @@ from create_envs import import_envs_and_create_db_config
 DB_CONFIG = import_envs_and_create_db_config()
 
 def ensure_table_exists():
-    conn = psycopg2.connect(**DB_CONFIG)
+    try:
+        conn = psycopg2.connect(**DB_CONFIG)
+    except Exception as e:
+        print(f"Error connecting to database: {e}")
+        return
     try:
         with conn:
             with conn.cursor() as cur:
@@ -19,12 +23,18 @@ def ensure_table_exists():
                         date DATE NOT NULL
                     )
                 """)
+    except Exception as e:
+        print(f"Error creating table: {e}")
     finally:
         conn.close()
 ensure_table_exists()
 
 def create_row(name: str, date_value: date):
-    conn = psycopg2.connect(**DB_CONFIG)
+    try:
+        conn = psycopg2.connect(**DB_CONFIG)
+    except Exception as e:
+        print(f"Error connecting to database: {e}")
+        return
     try:
         with conn:
             with conn.cursor() as cur:
@@ -33,6 +43,8 @@ def create_row(name: str, date_value: date):
                     (name, date_value)
                 )
                 print("Row created:", name, date_value)
+    except Exception as e:
+        print(f"Error creating row: {e}")
     finally:
         conn.close()
 

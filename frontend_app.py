@@ -10,12 +10,19 @@ DB_CONFIG = import_envs_and_create_db_config()
 
 
 def get_last_20_records():
-    conn = psycopg2.connect(**DB_CONFIG)
-    cur = conn.cursor()
-    cur.execute('SELECT name, date FROM data ORDER BY id DESC LIMIT 20')
-    rows = cur.fetchall()
-    cur.close()
-    conn.close()
+    try:
+        conn = psycopg2.connect(**DB_CONFIG)
+        cur = conn.cursor()
+        cur.execute('SELECT name, date FROM data ORDER BY id DESC LIMIT 20')
+        rows = cur.fetchall()
+    except Exception as e:
+        print(f"Error fetching records: {e}")
+        rows = []
+    finally:
+        if 'cur' in locals():
+            cur.close()
+        if 'conn' in locals():
+            conn.close()
     return rows
 
 @app.route('/')

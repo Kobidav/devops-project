@@ -29,9 +29,10 @@ def get_last_20_records():
 def index():
     records = get_last_20_records()
     tpl = '''
+        <head> <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> </head>
         <h2 style="text-align:center;">Last 20 Records</h2>
         <div style="display: flex; justify-content: center;">
-            <table border="1">
+            <table  class="table table-striped table-hover">
                 <tr><th>Name</th><th>Data</th></tr>
                 % for name, date in records:
                     <tr><td>{{name}}</td><td>{{date}}</td></tr>
@@ -42,4 +43,4 @@ def index():
     return SimpleTemplate(tpl).render(records=records)
 
 if __name__ == '__main__':
-    run(app, host='localhost', port=8080, debug=True)
+    run(app, host='0.0.0.0', port=8080, debug=True)

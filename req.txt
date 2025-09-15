@@ -1,4 +1,0 @@
-bottle
-psycopg2-binary
-requests
-dotenv

@@ -34,3 +34,30 @@ DB_PASSWORD=
 DB_HOST=
 DB_PORT=
 ```
+
+## Docker image
+
+werta/devops-project
+
+````markdown
+## K8s manifests
+
+The `k8s` folder contains Kubernetes manifests for deploying the devops-project application and its PostgreSQL database. These manifests include Deployment, Service, and ConfigMap resources to simplify running the project in a Kubernetes cluster.
+
+### How to install
+
+1. Ensure you have access to a Kubernetes cluster and `kubectl` is configured.
+2. Apply the manifests in the `k8s` folder:
+
+    ```bash
+    kubectl apply -f k8s/
+    ```
+
+3. Check the status of your pods and services:
+
+    ```bash
+    kubectl get pods
+    kubectl get services
+    ```
+
+Update the manifests as needed for your environment (e.g., database credentials, image tags).

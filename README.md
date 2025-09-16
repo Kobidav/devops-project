@@ -23,7 +23,7 @@ docker run \
     -e DB_HOST=$DB_HOST \
     -e DB_PORT=5432 \
     -e DB_PASSWORD=$POSTGRES_PASSWORD \
-    -p 8080"8080 \
+    -p 8080:8080 \
     base
 docker run \
     -d \

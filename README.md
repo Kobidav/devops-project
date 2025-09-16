@@ -16,6 +16,7 @@ export DB_HOST=$(docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddre
 
 docker build . -t base
 docker run \
+    -d \
     -e exe=frontend_app.py \
     -e DB_NAME=postgres \
     -e DB_USER=postgres \
@@ -24,6 +25,7 @@ docker run \
     -e DB_PASSWORD=$POSTGRES_PASSWORD \
     base
 docker run \
+    -d \
     -e exe=backend_app.py \
     -e DB_NAME=postgres \
     -e DB_USER=postgres \

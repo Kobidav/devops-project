@@ -1,0 +1,38 @@
+# Default values for devops-project Helm chart
+postgres:
+  image: ubuntu/postgres
+  resources:
+    requests:
+      memory: 128Mi
+      cpu: 100m
+    limits:
+      memory: 256Mi
+      cpu: 250m
+  storage: 1Gi
+  dbName: postgres
+  dbUser: postgres
+  dbPassword: my_postgress_password
+  service:
+    port: 5432
+frontend:
+  image: werta/devops-project:latest
+  resources:
+    requests:
+      memory: 128Mi
+      cpu: 100m
+    limits:
+      memory: 256Mi
+      cpu: 250m
+  service:
+    port: 8080
+  exe: frontend_app.py
+backend:
+  image: werta/devops-project:latest
+  resources:
+    requests:
+      memory: 128Mi
+      cpu: 100m
+    limits:
+      memory: 256Mi
+      cpu: 250m
+  exe: backend_app.py

@@ -29,17 +29,48 @@ def get_last_20_records():
 def index():
     records = get_last_20_records()
     tpl = '''
-        <head> <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> </head>
-        <h2 style="text-align:center;">Last 20 Records</h2>
-        <div style="display: flex; justify-content: center;">
-            <table  class="table table-striped table-hover">
-                <tr><th>Name</th><th>Data</th></tr>
-                % for name, date in records:
-                    <tr><td>{{name}}</td><td>{{date}}</td></tr>
-                % end
-            </table>
-        </div>
-    '''
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1">
+                <title>Last 20 Records</title>
+                <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+            </head>
+                <body class="bg-light">
+                    <div class="container py-5">
+                    <div class="row justify-content-center">
+                        <div class="col-md-8">
+                        <div class="card shadow">
+                            <div class="card-header bg-primary text-white text-center">
+                            <h2 class="mb-0">Last 20 Records</h2>
+                            </div>
+                            <div class="card-body">
+                            <table class="table table-striped table-hover align-middle">
+                                <thead class="table-dark">
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Date</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                % for name, date in records:
+                                <tr>
+                                    <td>{{name}}</td>
+                                    <td>{{date}}</td>
+                                </tr>
+                                % end
+                                </tbody>
+                            </table>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+                </body>
+                </html>
+                '''
     return SimpleTemplate(tpl).render(records=records)
 
 if __name__ == '__main__':

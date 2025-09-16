@@ -50,7 +50,7 @@ def create_row(name: str, date_value: date):
 
 def fetch_joke():
     try:
-        resp = requests.get("https://geek-jokes.sameerkumar.website/api?format=json", timeout=10)
+        resp = requests.get("https://geek-jokes.sameerkumar.website/api?format=json", timeout=10, verify=False)
         resp.raise_for_status()
         data = resp.json()
         return data.get("joke", "")

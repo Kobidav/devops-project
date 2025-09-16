@@ -1,20 +1,8 @@
-apiVersion: v1
-kind: Service
-metadata:
-  name: postgres
-  namespace: default
-spec:
-  ports:
-    - port: 5432
-      targetPort: 5432
-  selector:
-    app: postgres
----
+ 
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: postgres
-  namespace: default
 spec:
   serviceName: postgres
   replicas: 1
@@ -28,14 +16,14 @@ spec:
     spec:
       containers:
         - name: postgres
-          image: ubuntu/postgres
+          image: {{ .Values.postgres.image }}
           ports:
             - containerPort: 5432
           env:
             - name: POSTGRES_DB
-              value: "postgres"
+              value: {{ .Values.postgres.dbName | quote }}
             - name: POSTGRES_USER
-              value: "postgres"
+              value: {{ .Values.postgres.dbUser | quote }}
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
@@ -43,27 +31,28 @@ spec:
                   key: POSTGRES_PASSWORD
           resources:
             requests:
-              memory: "128Mi"
-              cpu: "100m"
+              memory: {{ .Values.postgres.resources.requests.memory | quote }}
+              cpu: {{ .Values.postgres.resources.requests.cpu | quote }}
             limits:
-              memory: "256Mi"
-              cpu: "250m"
+              memory: {{ .Values.postgres.resources.limits.memory | quote }}
+              cpu: {{ .Values.postgres.resources.limits.cpu | quote }}
           volumeMounts:
             - name: pgdata
               mountPath: /var/lib/postgresql/data
+      volumes:
+        - name: pgdata
+          persistentVolumeClaim:
+            claimName: pgdata
+  persistentVolumeClaimRetentionPolicy:
+    whenDeleted: Delete # Delete PVCs when the StatefulSet is deleted
   volumeClaimTemplates:
     - metadata:
         name: pgdata
+        annotations:
+          "helm.sh/resource-policy": ""
       spec:
         accessModes: [ "ReadWriteOnce" ]
         resources:
           requests:
-            storage: 1Gi
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: postgres-secret
-  namespace: default
-stringData:
-  POSTGRES_PASSWORD: "my_postgress_password"
+            storage: {{ .Values.postgres.storage }}
+

@@ -48,7 +48,7 @@ DB_PORT=
 
 ## Docker image
 
-werta/devops-project
+werta/devops-project-amd64
 
 ````markdown
 ## K8s manifests

@@ -28,7 +28,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: werta/devops-project:latest
+          image: werta/devops-project-amd64:latest
           ports:
             - containerPort: 8080
           env:

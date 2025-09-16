@@ -15,7 +15,7 @@ postgres:
   service:
     port: 5432
 frontend:
-  image: werta/devops-project:latest
+  image: werta/devops-project-amd64:latest
   resources:
     requests:
       memory: 128Mi
@@ -27,7 +27,7 @@ frontend:
     port: 8080
   exe: frontend_app.py
 backend:
-  image: werta/devops-project:latest
+  image: werta/devops-project-amd64:latest
   resources:
     requests:
       memory: 128Mi

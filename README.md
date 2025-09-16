@@ -23,6 +23,14 @@ docker run \
     -e DB_PORT=5432 \
     -e DB_PASSWORD=$POSTGRES_PASSWORD \
     base
+docker run \
+    -e exe=backend_app.py \
+    -e DB_NAME=postgres \
+    -e DB_USER=postgres \
+    -e DB_HOST=$DB_HOST \
+    -e DB_PORT=5432 \
+    -e DB_PASSWORD=$POSTGRES_PASSWORD \
+    base
 ```
 
 ## Optional: .env Template

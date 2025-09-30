@@ -19,7 +19,7 @@ frontend:
   resources:
     requests:
       memory: 128Mi
-      cpu: 150m
+      cpu: 100m
     limits:
       memory: 256Mi
       cpu: 250m

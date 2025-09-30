@@ -43,7 +43,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install poetry
         poetry config virtualenvs.create false
-        poetry install --with dev
+        poetry install --extras dev
         
     - name: Code formatting check (Black)
       run: |
@@ -127,7 +127,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install poetry
         poetry config virtualenvs.create false
-        poetry install --with dev
+        poetry install --extras dev
         
     - name: Run tests with coverage
       env:

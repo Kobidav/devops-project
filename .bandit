@@ -1,0 +1,20 @@
+# Bandit configuration file
+# Security linting for Python
+
+[bandit]
+# Exclude test directories and virtual environments
+exclude_dirs = ["tests", "test", ".venv", "venv", "__pycache__"]
+
+# Skip specific test IDs (if needed)
+# B101: Test for use of assert
+# B201: Test for Flask app run with debug=True
+skips = ["B101"]
+
+# Set confidence levels (LOW, MEDIUM, HIGH)
+confidence = "MEDIUM"
+
+# Set severity levels (LOW, MEDIUM, HIGH)
+level = "MEDIUM"
+
+# Output format options: csv, json, txt, xml, yaml
+format = "txt"
